@@ -1,24 +1,22 @@
-const { User, Basket } = require('../models/models')
 const ApiError = require('../error/ApiError')
-const { hash, compareSync } = require('bcryptjs')
-const { sign } = require('jsonwebtoken')
+const userService = require('../service/user-service')
 
 class UserControler {
 
     async registration(req, res) {
-        const { email, password, role } = req.body
+        try {
+            const { email, password, role } = req.body
 
-        const candidate = await User.findOne({ where: { email } })
-        if (candidate) return res.json({ message: 'Такий користувач вже існує' })
-        const hashPassword = await hash(password, 5)
+            const userData = await userService.registration(email, password, role)
 
-        const user = await User.create({ email, password: hashPassword, role })
-        const basket = await Basket.create({ userId: user.id })
+            res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
+            res.json(userData)
 
-        const toket = sign({ id: user.id, email, role }, process.env.SECRET_JWT, { expiresIn: '24h' })
+        } catch (e) {
+            next(e)
 
 
-        res.status(201).json({ toket })
+        }
 
 
 
@@ -26,35 +24,75 @@ class UserControler {
 
 
     async login(req, res) {
-        const { email, password, role } = req.body
 
-        const user = await User.findOne({ where: { email } })
-        const comparePassword = compareSync(password, user.password, 5)
-        if (!comparePassword) {
-            return next(ApiError.err(422, "Пароль не вірний"))
+        try {
+            const { email, password, role } = req.body
+
+
+            res.status(201).json({})
+        } catch (e) {
+            next(e)
+
         }
 
-        const toket = sign({ id: user.id, email, role }, process.env.SECRET_JWT, { expiresIn: '24h' })
-
-
-        res.status(201).json({ toket })
-
-
-
-
-
-
     }
 
-    async chackAuth(req, res, next) {
-        const { id, email, role } = req.user
-        const toket = sign({ id, email, role }, process.env.SECRET_JWT, { expiresIn: '24h' })
 
-        res.json({ toket })
+
+
+    async logout(req, res) {
+        try {
+
+        } catch (e) {
+            next(e)
+
+        }
 
     }
 
 
+
+    // async chackAuth(req, res, next) {
+    //     const { id, email, role } = req.user
+    //     const toket = sign({ id, email, role }, process.env.SECRET_JWT, { expiresIn: '24h' })
+
+    //     res.json({ toket })
+
+    // }
+
+    async users(req, res, next) {
+        try {
+
+        } catch (e) {
+            next(e)
+
+        }
+    }
+
+
+    async refresh(req, res, next) {
+        try {
+
+        } catch (e) {
+            next(e)
+
+        }
+
+
+    }
+
+
+    async activate(req, res, next) {
+        try {
+            const { link } = req.params
+            await userService.activate(link)
+            return res.redirect(process.env.CLIENT_URL)
+
+        } catch (e) {
+            next(e)
+        }
+
+    }
 }
 
 

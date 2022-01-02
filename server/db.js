@@ -1,10 +1,10 @@
-const { Sequelize} = require('sequelize')
+const { Sequelize } = require('sequelize')
 
-module.exports = new Sequelize("internet_shop", "root", "4820mysql" , {
+module.exports = new Sequelize("internet_shop", "root", "4820mysql", {
     host: "localhost",
     dialect: "mysql",
-    port:'5432',
-    logging: function () {},
+    port: '5432',
+    logging: function() {},
     pool: {
         max: 5,
         min: 0,
