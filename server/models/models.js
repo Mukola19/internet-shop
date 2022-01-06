@@ -6,7 +6,6 @@ const User = sequelize.define('user', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     email: { type: DataTypes.STRING, unique: true },
     password: { type: DataTypes.STRING },
-    role: { type: DataTypes.STRING, defaultValue: 'USER' },
     activationLink: {type: DataTypes.STRING},
     isActivated: {type: DataTypes.BOOLEAN, defaultValue: false},  
 
@@ -16,6 +15,13 @@ const Token = sequelize.define('token', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     refreshToken: { type: DataTypes.STRING},
 
+})
+
+
+const Roles = sequelize.define('roles', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    admin: { type: DataTypes.BOOLEAN ,defaultValue: false},
+    client: { type: DataTypes.BOOLEAN ,defaultValue: true},
 })
 
 const Basket = sequelize.define('basket', {
@@ -80,6 +86,8 @@ Basket.belongsTo(User)
 User.hasOne(Token)
 Token.belongsTo(User)
 
+User.hasOne(Roles)
+Roles.belongsTo(User)
 
 Basket.hasMany(Basket)
 BasketDevice.belongsTo(BasketDevice)
@@ -95,7 +103,7 @@ Brand.hasMany(Device)
 Device.belongsTo(Brand)
 
 
-Device.hasMany(DeviceInfo)
+Device.hasMany(DeviceInfo, {as: 'info'})
 DeviceInfo.belongsTo(Device)
 
 
@@ -122,7 +130,7 @@ module.exports = {
     Brand,
     Rating,
     TypeBrand,
-    Token
-
+    Token,
+    Roles
 
 }

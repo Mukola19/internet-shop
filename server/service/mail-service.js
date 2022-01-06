@@ -1,4 +1,4 @@
-const { createTransport } = require("nodemailer");
+const { createTransport } = require('nodemailer')
 
 class MailService {
   constructor() {
@@ -10,7 +10,7 @@ class MailService {
         user: process.env.SMPT_USER,
         pass: process.env.SMPT_PASSWORD,
       },
-    });
+    })
   }
 
   async sendActivationLink(to, link) {
@@ -18,15 +18,15 @@ class MailService {
       from: process.env.SMPT_USER,
       to,
       subject: `Активація акаунта на ${process.env.API_URL}`,
-      text: "",
+      text: '',
       html: `
                     <div>
                     <h1>Для активації перейдіть по посиланню</h1>
                      <a href='${link}'>${link}</a>
                     
                     </div>`,
-    });
+    })
   }
 }
 
-module.exports = new MailService();
+module.exports = new MailService()

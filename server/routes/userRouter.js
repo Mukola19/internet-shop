@@ -16,9 +16,10 @@ const validator = [
 router.post('/registration', ...validator,User.registration)
 router.post('/login',...validator, User.login)
 router.post('/logout', User.logout)
+router.post('/raising_admin',auth, User.raisingAdmin)
 router.get('/activate/:link', User.activate)
 router.get('/refresh', User.refresh)
-router.get('/users', User.users)
+router.get('/auth',auth, User.chackAuth)
 
 
 

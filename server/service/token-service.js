@@ -1,13 +1,13 @@
-const { sign } = require("jsonwebtoken")
-const { Token } = require("../models/models")
+const { sign, verify } = require('jsonwebtoken')
+const { Token } = require('../models/models')
 
 class TokenService {
-  generateTokens(payload) {
+  generateTokens({isActivation,...payload}) {
     const accessToken = sign(payload, process.env.SECRET_ACCESS_JWT, {
-      expiresIn: "30m",
+      expiresIn: '30m',
     })
     const refreshToken = sign(payload, process.env.SECRET_REFRESH_JWT, {
-      expiresIn: "30d",
+      expiresIn: '30d',
     })
     return {
       accessToken,
@@ -27,7 +27,33 @@ class TokenService {
   }
 
   async removeToken(refreshToken) {
-     const tokenData = await Token.destroy({where:{refreshToken}, force: true})
+    const tokenData = await Token.destroy({
+      where: { refreshToken },
+      force: true,
+    })
+    return tokenData
+  }
+
+  validateRefreshToken(token) {
+    try {
+      const dataToken = verify(token, process.env.SECRET_REFRESH_JWT)
+      return dataToken
+    } catch (e) {
+      return null
+    }
+  }
+
+  validateAccessToken(token) {
+    try {
+      const dataToken = verify(token, process.env.SECRET_ACCESS_JWT)
+      return dataToken
+    } catch (e) {
+      return null
+    }
+  }
+
+  async findToken(refreshToken) {
+    const tokenData = await Token.findOne({ where: { refreshToken } })
     return tokenData
   }
 }
