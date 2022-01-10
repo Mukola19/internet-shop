@@ -5,7 +5,7 @@ export const Dropdown = ({ title, data, onclick }) => {
   return (
     <NavDropdown title={title} id='navbarScrollingDropdown'>
       {data.map(d => (
-        <NavDropdown.Item onClick={() => onclick(d.id)}>{d.name}</NavDropdown.Item>
+        <NavDropdown.Item onClick={() => onclick(d.id)} key={d.id}>{d.name}</NavDropdown.Item>
       ))}
 
       <NavDropdown.Divider />

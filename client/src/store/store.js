@@ -1,11 +1,13 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import user from './reducer/userReducer'
+import types from './reducer/typesReducer'
 
 
-
-const reducer = {
-    user
-}
+ 
+const reducer = combineReducers({
+    user,
+    types
+})
 
 
 const middleware = getDefaultMiddleware({
@@ -19,3 +21,5 @@ export const store = configureStore({
  middleware,
  devTools: process.env.NODE_ENV !== 'production',
 })
+
+

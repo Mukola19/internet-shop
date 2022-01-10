@@ -1,0 +1,12 @@
+.card {
+    width: 24rem ;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+a {
+    cursor: pointer;
+}
+
+p {
+    padding-top: 10px;
+}
