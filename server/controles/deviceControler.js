@@ -31,7 +31,7 @@ class DeviceControler {
 
 
 
-  async getDevice(req, res) {
+  async getDevice(req, res,next) {
     try {
       const { limit, page, typeId, brandId } = req.query
       const devices = await DeviceService.getDevices(limit, page, typeId, brandId )

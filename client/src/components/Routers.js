@@ -7,12 +7,14 @@ import { ManagementPage } from "../pages/Management.page"
 import { ShopPage } from "../pages/Shop.page"
 
 // function that distributes routes
-export const Routers = ({ isAuth, isAdmin }) => {
+export const Routers = ({ isAuth, admin }) => {
   return (
     <Routes>
       {isAuth ? <Route path="/basket" element={<BasketPage/>} /> : null}
 
-      {isAdmin ? <Route path="/management" element={<ManagementPage/>} /> : null}
+      {admin ?<>
+       <Route path="/management" element={<ManagementPage/>}/> 
+       </>: null}
 
       <Route path="/shop" element={<ShopPage/>} />
       <Route path="/device" element={<DevicePage/>} />

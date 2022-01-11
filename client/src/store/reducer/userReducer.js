@@ -10,7 +10,8 @@ const initialState ={
   admin:false, 
   client:false,
   isActivated:false,
-  isAith:false
+  isAith:false,
+  adminMode:false
 }
 
 

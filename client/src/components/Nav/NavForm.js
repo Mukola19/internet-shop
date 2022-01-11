@@ -1,6 +1,9 @@
 import React from 'react'
 import { Button, Form, FormControl } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
+import cl from 'classname'
+import st from './Nav.module.css'
+
 
 export const NavForm = ({ title, data, onclick }) => {
   const { register, handleSubmit } = useForm()
@@ -10,7 +13,7 @@ const onsubmit = (data) => {
 }
 
   return (
-    <Form className='d-flex' onSubmit={handleSubmit(onsubmit)}>
+    <Form className={cl('d-flex', st.form)} onSubmit={handleSubmit(onsubmit)}>
       <FormControl
         type='search'
         placeholder='Search'
@@ -18,7 +21,7 @@ const onsubmit = (data) => {
         aria-label='Search'
         {...register('name')}
       />
-      <Button variant='outline-success' type='submit'>Search</Button>
+      <Button variant='secondary' type='submit'>Search</Button>
     </Form>
   )
 }

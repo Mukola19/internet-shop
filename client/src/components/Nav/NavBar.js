@@ -1,13 +1,13 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { Button, Container, Nav, Navbar } from "react-bootstrap"
-import { Navigate, useNavigate } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import { Dropdown } from "./Dropdown"
 import { NavForm } from "./NavForm"
+import st from "./Nav.module.css"
 import { logout } from "../../store/reducer/userReducer"
 import { TypesBrands } from "./TypesBrands"
 
-export const NavBar = ({ isAuth, admin }) => {
+export const NavBar = ({ isAuth, admin, adminMode }) => {
   let navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -15,13 +15,16 @@ export const NavBar = ({ isAuth, admin }) => {
     dispatch(logout(navigate))
   }
 
+ 
+
   return (
     <Navbar bg="secondary" expand="lg">
       <Container fluid>
         <Navbar.Brand onClick={() => navigate("/shop")}>Store</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Nav
+
+       {adminMode ? <h1>Адмін панель</h1> : <Nav
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: "100px" }}
             navbarScroll
@@ -32,11 +35,13 @@ export const NavBar = ({ isAuth, admin }) => {
                 <NavForm />
               </>
             ) : null}
-          </Nav>
+          </Nav>}
 
           {isAuth ? <Button variant="secondary">Корзина</Button> : null}
+
+
           {admin && isAuth ? (
-            <Button variant="secondary">Адмін панель</Button>
+            <Button variant="secondary" onClick={() => navigate('/management')}>Адмін панель</Button>
           ) : null}
 
           {!isAuth ? (

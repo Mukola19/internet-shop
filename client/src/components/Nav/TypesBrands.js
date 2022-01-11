@@ -3,16 +3,20 @@ import { useSelector } from "react-redux"
 import { Dropdown } from "./Dropdown"
 
 export const TypesBrands = () => {
-  const types = useSelector((state) => state.types)
+  const typesBrands = useSelector((state) => state.typesBrands)
 
     const typeOnClick = id => {
         console.log(id)
     }
 
+    const brandOnClick = id => {
+      console.log(id)
+  }
+
   return (
     <>
-      <Dropdown title="Бренд" data={[]} onclick={() => null} />
-      <Dropdown title="Тип" data={types.array} onclick={typeOnClick} />
+      <Dropdown title="Бренд" data={typesBrands.brands} onclick={brandOnClick} />
+      <Dropdown title="Тип" data={typesBrands.types} onclick={typeOnClick} />
     </>
   )
 }

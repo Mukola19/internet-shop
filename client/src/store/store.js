@@ -1,12 +1,14 @@
 import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import user from './reducer/userReducer'
-import types from './reducer/typesReducer'
+import typesBrands from './reducer/typesBrandsReducer'
+import devices from './reducer/devicesReducer'
 
 
  
 const reducer = combineReducers({
     user,
-    types
+    typesBrands,
+    devices
 })
 
 

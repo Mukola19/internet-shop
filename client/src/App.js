@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { NavBar } from './components/Nav/NavBar'
 import { Routers } from './components/Routers'
-import { getTypes } from './store/reducer/typesReducer'
+import { getDevices } from './store/reducer/devicesReducer'
+import { getTypesBrands } from './store/reducer/typesBrandsReducer'
 import { authMe } from './store/reducer/userReducer'
 
 const App = () => {
@@ -14,7 +15,9 @@ const App = () => {
 
   useEffect(() => {
     dispatch(authMe())
-    dispatch(getTypes())
+    dispatch(getTypesBrands())
+    dispatch(getDevices())
+    
   },[])
 
  return <div>

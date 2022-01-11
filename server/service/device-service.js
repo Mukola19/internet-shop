@@ -29,8 +29,9 @@ class DeviceService {
 
   async getDevices(limit, page, typeId, brandId ) {
 
-     limit = limit || 5
-     page = page || 1
+    // console.log(limit, page, typeId, brandId);
+     limit = +limit || 5
+     page = +page || 1
 
      let offset = page * limit - limit
 
