@@ -12,15 +12,14 @@ class DeviceService {
     brandId = +brandId
 
 
-    console.log(name, price, typeId, brandId, info, img )
 
     const device = await Device.create({ name, price, typeId, brandId, img })
 
-    if (info) {
-        info.forEach(({ title, description }) => {
-            DeviceInfo.create({ title, description, deviceId: device.id })
-          })
-    }
+    // if (info) {
+    //     info.forEach(({ title, description }) => {
+    //         DeviceInfo.create({ title, description, deviceId: device.id })
+    //       })
+    // }
    
 
     return device

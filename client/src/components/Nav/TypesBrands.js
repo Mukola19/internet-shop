@@ -1,6 +1,6 @@
 import React from "react"
 import { useSelector } from "react-redux"
-import { Dropdown } from "./Dropdown"
+import { Dropdown } from "../../commons/Dropdown"
 
 export const TypesBrands = () => {
   const typesBrands = useSelector((state) => state.typesBrands)

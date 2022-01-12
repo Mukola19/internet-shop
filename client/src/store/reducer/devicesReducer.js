@@ -16,12 +16,17 @@ const devicesReleases = createSlice({
       state.array = payload.rows
       state.count = payload.count
     },
+    setDevice: (state, { payload }) => {
+      console.log(payload);
+      state.array.push(payload)
+      state.count++
+    },
   },
 })
 
 const { actions, reducer } = devicesReleases
 
-export const { setDevices } = actions
+export const { setDevices, setDevice } = actions
 
 export default reducer
 
@@ -29,4 +34,10 @@ export const getDevices = ( brandId, typeId) => async (dispath, getState) => {
   const {page, limit} = getState().devices
   const data = await devicesApi.getDevices(page, limit, brandId, typeId)
   dispath(setDevices(data))
+}
+
+
+export const createDevice = form => async dispath => {
+  const data = await devicesApi.createDevice(form)
+  dispath(setDevice(data))
 }

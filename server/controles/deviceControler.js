@@ -3,14 +3,11 @@ const DeviceService = require("../service/device-service")
 
 class DeviceControler {
   async create(req, res, next) {
-
-
-
     try {
       let { name, price, typeId, brandId, info } = req.body
-      const { img } = req.files
-    //   info = JSON.parse(info)
-
+      const { img }  = req.files
+      //  info = JSON.parse(info)
+       
       const nameImg = await FileService.add(img)
       const device = await DeviceService.create({
         name,
@@ -21,11 +18,10 @@ class DeviceControler {
         img: nameImg,
       })
 
-
       return res.json(device)
-    
     } catch (e) {
-      next(e)
+      // next(e)
+      console.log(e);
     }
   }
 

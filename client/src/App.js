@@ -11,13 +11,13 @@ const App = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
 
-
+  let i = 0
 
   useEffect(() => {
     dispatch(authMe())
     dispatch(getTypesBrands())
     dispatch(getDevices())
-    
+    console.log('render', i++);
   },[])
 
  return <div>
