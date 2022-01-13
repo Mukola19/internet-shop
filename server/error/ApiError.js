@@ -5,13 +5,14 @@ class ApiError extends Error {
     this.message = message
   }
 
-  static err(status, message) {
-    return new ApiError(status, message)
+  static err( message) {
+    return new ApiError(400, message)
   }
 
   static UnauthorizedError(message) {
     return new ApiError(401, 'Не авторизовані')
   }
+
 }
 
 module.exports = ApiError

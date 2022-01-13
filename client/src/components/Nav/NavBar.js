@@ -1,6 +1,6 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Button, Container, Nav, Navbar } from "react-bootstrap"
-import {  useNavigate } from "react-router-dom"
+import {  useLocation, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { NavForm } from "./NavForm"
 import st from "./Nav.module.css"
@@ -9,12 +9,12 @@ import { TypesBrands } from "./TypesBrands"
 
 export const NavBar = ({ isAuth, admin, adminMode }) => {
   let navigate = useNavigate()
+  const locatin = useLocation()
   const dispatch = useDispatch()
 
   const exit = () => {
     dispatch(logout(navigate))
   }
-
  
 
   return (
@@ -29,15 +29,15 @@ export const NavBar = ({ isAuth, admin, adminMode }) => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            {isAuth ? (
-              <>
-                <TypesBrands />
-                <NavForm />
-              </>
-            ) : null}
+            {locatin.pathname !== '/auth' ?<>
+            <TypesBrands />
+            <NavForm />
+            </>: 
+            null}
+                
           </Nav>}
 
-          {isAuth ? <Button variant="secondary">Корзина</Button> : null}
+          {isAuth ? <Button variant="secondary" onClick={() => navigate('/basket')}>Корзина</Button> : null}
 
 
           {admin && isAuth ? (

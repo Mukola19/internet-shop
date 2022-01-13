@@ -3,6 +3,7 @@ import { NavDropdown } from 'react-bootstrap'
 
 export const Dropdown = ({ title, data, onclick }) => {
   const [active, setActive] = useState('')
+ 
 
   const toChoose = ({ name, id }) => {
     onclick(id)

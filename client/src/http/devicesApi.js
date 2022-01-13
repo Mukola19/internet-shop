@@ -25,4 +25,13 @@ export const devicesApi = {
   const res = await  $authHost.post('/device', formData)
     return res.data
   },
+
+
+  async getOneDevice(id) {
+    const res = await $host.get(`/device/${id}`)
+    return res.data
+  },
 }
+
+
+

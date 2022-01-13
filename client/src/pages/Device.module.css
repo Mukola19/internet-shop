@@ -1,0 +1,37 @@
+
+
+
+.row {
+    margin-top: 10px;
+    background-color: azure;
+    padding: 25px 0px 50px 0px;
+    border-radius: 3px;
+}
+
+.img {
+    /* width: 300px; */
+    margin-left: 8px;
+    border-radius: 3px;
+}
+
+h2 {
+    margin-left: 5px;
+    margin-top: 20px;
+}
+
+p {
+    margin-left: 5px;
+}
+
+.buttonBasket{
+margin-bottom: 10px;
+    
+}
+
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 32rem;
+}

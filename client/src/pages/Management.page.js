@@ -1,49 +1,35 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
-import { Router } from "react-router-dom"
-import { Button, Card, ListGroup, Modal } from "react-bootstrap"
+import { ListGroup } from "react-bootstrap"
 import st from "./Management.page.module.css"
-import { ModalCommon } from "../components/Modals/ModalCommon"
-import { createBrand, createType } from "../store/reducer/typesBrandsReducer"
-import { ModalDevice } from "../components/Modals/ModalDevice"
+import { ModalContainer } from "../components/Modals/ModalContainer"
 
 export const ManagementPage = () => {
-  const [showType, setShowType] = useState(false)
-  const [showBrand, setShowBrand] = useState(false)
-  const [showDevice, setShowDevice] = useState(false)
+  const [show, setShow] = useState(false)
+  const [flag, setFlag] = useState('')
+ 
+  const showModal = text => {
+    setShow(true)
+    setFlag(text)
+  }
+  const closeModal = boolean => {
+    setShow(boolean)
+    setFlag('')
+  }
 
   return (
     <>
       <ListGroup variant="flush" className={st.list}>
-        <ListGroup.Item onClick={() => setShowType(true)}>Типи</ListGroup.Item>
-        <ListGroup.Item onClick={() => setShowBrand(true)}> Бренди </ListGroup.Item>
-        <ListGroup.Item onClick={() => setShowDevice(true)}> Товари </ListGroup.Item>
+        <ListGroup.Item onClick={() => showModal('type')}>Типи</ListGroup.Item>
+        <ListGroup.Item onClick={() => showModal('brand')}> Бренди </ListGroup.Item>
+        <ListGroup.Item onClick={() => showModal('device')}> Товари </ListGroup.Item>
         <ListGroup.Item>Крористувачі</ListGroup.Item>
       </ListGroup>
 
-
-
-      <ModalCommon
-        show={showType}
-        handleClose={setShowType}
-        title="Типи"
-        create={createType}
-      />
-      <ModalCommon
-        show={showBrand}
-        handleClose={setShowBrand}
-        title="Бренди"
-        create={createBrand}
-      />
-       <ModalDevice
-        show={showDevice}
-        handleClose={setShowDevice}
-        title="Товари"
-        create={ null}
-      />
-
-
+      <ModalContainer show={show} handleClose={closeModal} flag={flag}/>
 
     </>
   )
 }
+
+

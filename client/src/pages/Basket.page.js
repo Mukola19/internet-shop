@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
  
 export const BasketPage = () => {
+    
+    useEffect(() => {
+        console.log('zxczxcxzc')
+    },[])
     return (
         <div>
-            BasketPage
+            ewrrrrrrrrrrrrrrrrrrrrrrrrrrrf
         </div>
     )
 }

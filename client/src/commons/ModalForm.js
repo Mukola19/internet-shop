@@ -2,13 +2,13 @@ import React from "react"
 import { Button, Form } from "react-bootstrap"
 import { useForm } from "react-hook-form"
 
-export const ModalForm = ({ onsubmit, show }) => {
+export const ModalForm = ({ create, isActive }) => {
   const { register, handleSubmit } = useForm()
 
   return (
     <>
-      {show ? (
-        <Form onSubmit={handleSubmit(onsubmit)}>
+      {isActive === 1 ? (
+        <Form onSubmit={handleSubmit(create)}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control
               type="name"

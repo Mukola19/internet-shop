@@ -5,6 +5,8 @@ const router = Router()
 
 
 router.get('/', Basket.getBasket)
+router.post('/', Basket.addDeviceInBasket)
+// router.delete('/', Basket.remoweFromBasket)
 
 
 

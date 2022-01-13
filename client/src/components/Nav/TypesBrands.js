@@ -1,22 +1,28 @@
-import React from "react"
-import { useSelector } from "react-redux"
-import { Dropdown } from "../../commons/Dropdown"
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Dropdown } from '../../commons/Dropdown'
+import { getDevices } from '../../store/reducer/devicesReducer'
 
 export const TypesBrands = () => {
   const typesBrands = useSelector((state) => state.typesBrands)
+  const dispatch = useDispatch()
 
-    const typeOnClick = id => {
-        console.log(id)
-    }
+  const typeOnClick = typeId => {
+    dispatch(getDevices( typeId, null))
+  }
 
-    const brandOnClick = id => {
-      console.log(id)
+  const brandOnClick = brandId => {
+    dispatch(getDevices(null, brandId ))
   }
 
   return (
     <>
-      <Dropdown title="Бренд" data={typesBrands.brands} onclick={brandOnClick} />
-      <Dropdown title="Тип" data={typesBrands.types} onclick={typeOnClick} />
+      <Dropdown
+        title='Бренд'
+        data={typesBrands.brands}
+        onclick={brandOnClick}
+      />
+      <Dropdown title='Тип' data={typesBrands.types} onclick={typeOnClick} />
     </>
   )
 }
