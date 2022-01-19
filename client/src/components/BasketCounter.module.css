@@ -1,0 +1,17 @@
+.counter {
+  width: 100px;
+  padding-top: 50px;
+  display: flex;
+}
+
+.sign:hover {
+  background-color: rgb(68, 68, 68);
+}
+
+.count{
+  padding: 10px;
+  height: 5px;
+  margin-left: 5px;
+  color: rgb(8, 8, 8);
+  
+}

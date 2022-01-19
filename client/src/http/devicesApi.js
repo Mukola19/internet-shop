@@ -2,7 +2,7 @@ import { $host, $authHost } from './index'
 
 export const devicesApi = {
   async getDevices(page, limit, brandId, typeId) {
-    const res = await $host.get('/device', {
+    const res = await $authHost.get('/device', {
       params: {
         limit,
         page,
@@ -28,7 +28,7 @@ export const devicesApi = {
 
 
   async getOneDevice(id) {
-    const res = await $host.get(`/device/${id}`)
+    const res = await $authHost.get(`/device/${id}`)
     return res.data
   },
 }

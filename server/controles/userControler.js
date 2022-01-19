@@ -19,8 +19,7 @@ class UserControler {
       })
       res.json(userData)
     } catch (e) {
-      // next(e)
-      console.log(e);
+      next(e)
     }
   }
 
@@ -41,8 +40,7 @@ class UserControler {
       })
       res.json(userData)
     } catch (e) {
-      // next(e)    
-      console.log(e);  
+      next(e)    
     }
   }
 
@@ -70,8 +68,6 @@ class UserControler {
       return res.json(userData)
     } catch (e) {
       next(e)
-      // res.json({e})
-      // console.log(e)
     }
   }
 
@@ -95,8 +91,7 @@ class UserControler {
       const data = await userService.raisingAdmin(codeKey, req.user)
       res.json(data)
     } catch (e) {
-      // next(e)
-      console.log(e);
+      next(e)
     }
   }
 }

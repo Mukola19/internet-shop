@@ -30,7 +30,7 @@ class DeviceControler {
   async getDevice(req, res,next) {
     try {
       const { limit, page, typeId, brandId } = req.query
-      const devices = await DeviceService.getDevices(limit, page, typeId, brandId )
+      const devices = await DeviceService.getDevices(req.user.id, limit, page, typeId, brandId )
       res.json(devices)
     } catch (e) {
       next(e)
@@ -39,7 +39,7 @@ class DeviceControler {
 
   async getOneDevice(req, res) {
     try {
-        const device = await DeviceService.getOneDevice(req.params.id)
+        const device = await DeviceService.getOneDevice(req.user.id,req.params.id)
         res.json(device)
 
     } catch (e) {

@@ -2,13 +2,15 @@ import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/
 import user from './reducer/userReducer'
 import typesBrands from './reducer/typesBrandsReducer'
 import devices from './reducer/devicesReducer'
+import basket from './reducer/basketReducer'
 
 
  
 const reducer = combineReducers({
     user,
     typesBrands,
-    devices
+    devices,
+    basket
 })
 
 

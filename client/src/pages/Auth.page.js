@@ -1,27 +1,45 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
-import st from './Auth.page.css'
-import { login } from '../store/reducer/userReducer'
 import { Button, Form, Card } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import { ErrorMessage } from '@hookform/error-message'
+import { login, registration } from '../store/reducer/userReducer'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import st from './Auth.page.css'
+
+const schema = yup.object().shape({
+  email: yup.string().email(' Ведіть email').required(' Поле обовʼязково'),
+  password: yup
+    .string()
+    .min(4, ' Ведіть 4 символів')
+    .max(4, ' Ведіть 4 символів')
+    .required(' Поле обовʼязково'),
+})
 
 export const AuthPage = () => {
   let navigate = useNavigate()
   const [isLogin, setIsLogin] = useState(true)
-  const { register, handleSubmit } = useForm()
   const dispatch = useDispatch()
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
+  })
 
-
- 
-  const onsubmit = (data) => {
+  const onsubmit = data => {
     if (isLogin) {
       dispatch(login(data, navigate))
     } else {
-      // dispatch(login(data))
-      console.log('Ops')
+      dispatch(registration(data, navigate))
     }
+    reset()
+
   }
 
   return (
@@ -32,15 +50,17 @@ export const AuthPage = () => {
         <Form onSubmit={handleSubmit(onsubmit)}>
           <Form.Group className='mb-3' controlId='formBasicEmail'>
             <Form.Label>Логін</Form.Label>
+            <ErrorMessage errors={errors} name='email' />
             <Form.Control
               type='email'
-              placeholder='Enter email'
               {...register('email')}
+              placeholder='Enter email'
             />
           </Form.Group>
 
           <Form.Group className='mb-3' controlId='formBasicPassword'>
-            <Form.Label>Пароль</Form.Label>
+            <Form.Label>Пароль </Form.Label>
+            <ErrorMessage errors={errors} name='password' />
             <Form.Control
               type='password'
               placeholder='Password'

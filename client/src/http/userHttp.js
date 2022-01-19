@@ -3,6 +3,9 @@ import { $host, $authHost } from './index'
 export const userHttp = {
   async registration(form) {
     const res = await $host.post('/user/registration', form)
+    localStorage.setItem('token', res.data.accessToken)
+    return res.data.user
+
   },
 
   async login(form) {

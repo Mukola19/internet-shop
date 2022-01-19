@@ -6,6 +6,7 @@ import { NavForm } from "./NavForm"
 import st from "./Nav.module.css"
 import { logout } from "../../store/reducer/userReducer"
 import { TypesBrands } from "./TypesBrands"
+import { getBasket } from "../../store/reducer/basketReducer"
 
 export const NavBar = ({ isAuth, admin, adminMode }) => {
   let navigate = useNavigate()
@@ -37,7 +38,7 @@ export const NavBar = ({ isAuth, admin, adminMode }) => {
                 
           </Nav>}
 
-          {isAuth ? <Button variant="secondary" onClick={() => navigate('/basket')}>Корзина</Button> : null}
+          {isAuth ? <Button variant="secondary" onClick={() => dispatch(getBasket(navigate))}>Корзина</Button> : null}
 
 
           {admin && isAuth ? (

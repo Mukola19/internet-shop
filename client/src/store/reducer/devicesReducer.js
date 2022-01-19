@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { devicesApi } from "../../http/devicesApi"
+import { changeLoader } from "./userReducer"
 
 const initialState = {
   array: [],
@@ -38,9 +39,11 @@ export const { setDevices, setDevice,setOne } = actions
 export default reducer
 
 export const getDevices = (typeId, brandId ) => async (dispath, getState) => {
+  dispath(changeLoader(true))
   const {page, limit} = getState().devices
   const data = await devicesApi.getDevices(page, limit, brandId, typeId)
   dispath(setDevices(data))
+  dispath(changeLoader(false))
 }
 
 
@@ -50,7 +53,10 @@ export const createDevice = form => async dispath => {
 }
 
 export const getOneDevice = id => async dispath => {
+  dispath(changeLoader(true))
   const device = await devicesApi.getOneDevice(id)
   dispath(setOne(device))
+  dispath(changeLoader(false))
+
 }
 
