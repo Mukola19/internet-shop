@@ -8,7 +8,7 @@ import { createDevice } from "../../store/reducer/devicesReducer"
 import { useDispatch } from "react-redux"
 
 export const ModalContainer = ({ handleClose, show, flag }) => {
-  const [isActive, setIsActive] = useState(0)
+  const [isActive, setIsActive] = useState(1)
   const dispatch = useDispatch()
 
 
@@ -19,7 +19,6 @@ export const ModalContainer = ({ handleClose, show, flag }) => {
         <RadioButtons isActive={isActive} setIsActive={setIsActive} />
       </Modal.Header>
       <Modal.Body>
-        {/* {!isActive ? <h1>Bla Bla Bla</h1> : null} */}
         <ModalSwith
           flag={flag}
           isActive={isActive}
@@ -28,11 +27,6 @@ export const ModalContainer = ({ handleClose, show, flag }) => {
           createDevice={form => dispatch(createDevice(form, setIsActive))}
         />
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="danger" onClick={handleClose}>
-          Скасувати
-        </Button>
-      </Modal.Footer>
     </Modal>
   )
 }
@@ -45,11 +39,11 @@ const ModalSwith = ({
   isActive,
 }) => {
   switch (flag) {
-    case "type":
+    case "Type":
       return <ModalCommon create={createType} isActive={isActive} />
-    case "brand":
+    case "Brand":
       return <ModalCommon create={createBrand} isActive={isActive} />
-    case "device":
+    case "Device":
       return <ModalDevice create={createDevice} isActive={isActive} />
     default:
       return null

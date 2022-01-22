@@ -6,7 +6,6 @@ export const RadioButtons = ({isActive, setIsActive}) => {
   const radios = [
     { name: 'Додати', value: 1 },
     { name: 'Редагувати', value: 2 },
-    { name: 'Видалити', value: 3 },
   ]
 
 

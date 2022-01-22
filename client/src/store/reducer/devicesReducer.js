@@ -40,7 +40,7 @@ export default reducer
 
 export const getDevices = (typeId, brandId ) => async (dispath, getState) => {
   dispath(changeLoader(true))
-  const {page, limit} = getState().devices
+  const { page, limit } = getState().devices
   const data = await devicesApi.getDevices(page, limit, brandId, typeId)
   dispath(setDevices(data))
   dispath(changeLoader(false))

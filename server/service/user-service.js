@@ -23,10 +23,8 @@ class UserService {
       password: hashPassword,
       activationLink,
     })
-    console.log(user);
     await Basket.create({ userId: user.id })
     const roles = await Roles.create({ userId: user.id })
-    console.log(roles);
 
     await mailService.sendActivationLink(
       email,
@@ -34,13 +32,10 @@ class UserService {
     )
     user.roles = roles
     const userDto = new UserDto(user) // id, email, roles, isActivation
-    console.log(userDto);
 
     const tokens = tokenService.generateTokens({ ...userDto })
-    console.log(tokens);
 
     await tokenService.saveToken(userDto.id, tokens.refreshToken)
-    console.log({ ...tokens, user: userDto });
 
     return { ...tokens, user: userDto }
   }

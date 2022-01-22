@@ -20,10 +20,9 @@ export const ManagementPage = () => {
   return (
     <>
       <ListGroup variant="flush" className={st.list}>
-        <ListGroup.Item onClick={() => showModal('type')}>Типи</ListGroup.Item>
-        <ListGroup.Item onClick={() => showModal('brand')}> Бренди </ListGroup.Item>
-        <ListGroup.Item onClick={() => showModal('device')}> Товари </ListGroup.Item>
-        <ListGroup.Item>Крористувачі</ListGroup.Item>
+        <ListGroup.Item onClick={() => showModal('Type')}>Типи</ListGroup.Item>
+        <ListGroup.Item onClick={() => showModal('Brand')}> Бренди </ListGroup.Item>
+        <ListGroup.Item onClick={() => showModal('Device')}> Товари </ListGroup.Item>
       </ListGroup>
 
       <ModalContainer show={show} handleClose={closeModal} flag={flag}/>

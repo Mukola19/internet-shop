@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { getDevices } from "./devicesReducer"
 import { userHttp } from "../../http/userHttp"
+import { getTypesBrands } from "./typesBrandsReducer"
 
 const initialState = {
   id: null,
@@ -50,49 +51,52 @@ export const { initUser , changeLoader, changeIsError} = actions
 
 export default reducer
 
-export const registration = (form, navigate) => async dispath => {
+export const registration = (form, navigate) => async dispatch => {
   try {
-    dispath(changeLoader(true))
+    dispatch(changeLoader(true))
     const user = await userHttp.registration(form)
-    dispath(initUser(user))
-    dispath(getDevices())
-    dispath(changeLoader(false))
+    dispatch(initUser(user))
+    dispatch(getDevices())
+    dispatch(changeLoader(false))
     navigate("/shop")
   } catch (e) {
     let error = e.response.data.message
-    dispath(changeIsError(error ? error :'Ops'))
+    dispatch(changeIsError(error ? error :'Ops'))
   }
 
 }
 
-export const login = (form, navigate) => async dispath => {
+export const login = (form, navigate) => async dispatch => {
   try {
-    dispath(changeLoader(true))
+    dispatch(changeLoader(true))
     const user = await userHttp.login(form)
-    dispath(initUser(user))
-    dispath(getDevices())
+    dispatch(initUser(user))
+    dispatch(getDevices())
     navigate("/shop")
-    dispath(changeLoader(false))
+    dispatch(changeLoader(false))
   } catch (e) {
     let error = e.response.data.message
-    dispath(changeIsError(error ? error :'Ops'))
+    dispatch(changeIsError(error ? error :'Ops'))
   }
  
 
 }
 
-export const logout = (navigate) => async dispath => {
-  dispath(changeLoader(true))
+export const logout = (navigate) => async dispatch => {
+  dispatch(changeLoader(true))
   const data = await userHttp.logout()
-  dispath(initUser())
-  dispath(getDevices())
-  dispath(changeLoader(false))
+  dispatch(initUser())
+  dispatch(getDevices())
+  dispatch(changeLoader(false))
   navigate("/auth")
 }
 
-export const authMe = () => async dispath => {
-  dispath(changeLoader(true))
+export const authMe = () => async dispatch => {
+  dispatch(changeLoader(true))
   const data = await userHttp.authMe()
-  dispath(initUser(data))
-  dispath(changeLoader(false))
+  dispatch(initUser(data))
+  dispatch(getTypesBrands())
+  dispatch(getDevices())
+  dispatch(changeLoader(false))
+
 }

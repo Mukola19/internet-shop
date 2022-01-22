@@ -3,6 +3,7 @@ import { Button, Card, Col, Row, Image, div, Container } from "react-bootstrap"
 import context from "react-bootstrap/esm/AccordionContext"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
+import { addDeviceInBasket, deleteFromBasket } from "../store/reducer/basketReducer"
 import { getOneDevice } from "../store/reducer/devicesReducer"
 import st from "./Device.module.css"
 
@@ -31,16 +32,20 @@ export const DevicePage = () => {
                 <h2>{device.name}</h2>
                 <p>{device.price}</p>
               </div>
-              <Button variant="outline-secondary" className={st.buttonBasket}>
-                В корзину
-              </Button>
+              { device.basketDevice ? <Button variant="danger" className={st.button} onClick={() => dispatch(deleteFromBasket(device.id))}>Видалити</Button> :
+        <Button variant="secondary" className={st.button} onClick={() => dispatch(addDeviceInBasket(device.id))}>В корзину</Button>
+
+}
             </div>
           </Col>
           <Col md={{ span: 4, offset: 3 }}>
             <Container>
               <h3>Характеристики</h3>
               <ul>
-                <li>Компресор: hdoe11</li>
+                {device.infos ? device.infos.map(info => (
+                <li key={info.id}>{info.title} :     {info.description}</li>
+
+                )) : null}
               </ul>
             </Container>
           </Col>
@@ -51,3 +56,5 @@ export const DevicePage = () => {
 
   return null
 }
+
+

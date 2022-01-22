@@ -13,7 +13,7 @@ export const ShopPage = () => {
     <Container>
       <Row>
             {devices.array.map((device) => (
-              <DeviceList {...device} key={device.id}  basketId/>
+              <DeviceList {...device} key={device.id} />
             ))}
       </Row>
     </Container>

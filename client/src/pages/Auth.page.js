@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form'
 import { Button, Form, Card } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { ErrorMessage } from '@hookform/error-message'
-import { login, registration } from '../store/reducer/userReducer'
-import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { login, registration } from '../store/reducer/userReducer'
 import st from './Auth.page.css'
 
 const schema = yup.object().shape({

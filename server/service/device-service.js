@@ -6,7 +6,8 @@ class DeviceService {
     if (!data) {
       throw ApiError.err(400, "Форма не пройшла валідацію")
     }
-    let { name, price, typeId, brandId, info, img } = data
+    let { name, price, typeId, brandId, infos, img } = data
+    console.log(infos);
 
     price = +price
     typeId = +typeId
@@ -14,11 +15,11 @@ class DeviceService {
 
     const device = await Device.create({ name, price, typeId, brandId, img })
 
-    // if (info) {
-    //     info.forEach(({ title, description }) => {
-    //         DeviceInfo.create({ title, description, deviceId: device.id })
-    //       })
-    // }
+    if (infos) {
+        infos.forEach(({ title, description }) => {
+            DeviceInfo.create({ title, description, deviceId: device.id })
+          })
+    }
 
     return device
   }
@@ -65,12 +66,11 @@ class DeviceService {
 
 
      const rows = devices.rows.map(decice => {
-          return new DeviceAllDto(decice ,basketId )
+          return new DeviceAllDto(decice,basketId )
  
     })
-    
 
-    return { rows, count:devices.count }
+    return { rows, count: devices.count }
   }
 
   async getOneDevice(basketId, id) {
@@ -84,7 +84,7 @@ class DeviceService {
 
 
 
-    return new DeviceAllDto(decice ,basketId )
+    return new DeviceAllDto(device ,basketId )
 
   }
 }

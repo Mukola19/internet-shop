@@ -1,7 +1,8 @@
 import React from "react"
-import { Button, Form } from "react-bootstrap"
+import { Button, Form, FormLabel } from "react-bootstrap"
 import { useForm } from "react-hook-form"
 import { ErrorMessage } from '@hookform/error-message'
+import { ErrorForm } from "./ErrorForm"
 
 
 export const ModalForm = ({ create, isActive }) => {
@@ -12,7 +13,9 @@ export const ModalForm = ({ create, isActive }) => {
       {isActive === 1 ? (
         <Form onSubmit={handleSubmit(create)}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <ErrorMessage name='name' errors={errors}/>
+            <FormLabel>
+            <ErrorForm name='name' errors={errors}/>
+            </FormLabel>
             <Form.Control
               type="name"
               placeholder="Enter name"

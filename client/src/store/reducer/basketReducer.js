@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { BasketApi } from '../../http/basketApi'
 import { devicesApi } from '../../http/devicesApi'
-import { getDevices } from './devicesReducer'
+import { getDevices, getOneDevice } from './devicesReducer'
 import { changeLoader } from './userReducer'
 
 const initialState = {
@@ -22,16 +22,16 @@ const basketReleases = createSlice({
     },
     setCount: (state, { payload }) => {
       state.array.forEach(d => {
-        if (d.id === payload.deviceId) {
+        if (d.deviceId === payload.deviceId) {
           d.count = payload.count
         }
       })
     },
 
     deleteDevice: (state, { payload }) => {
-  
     const newArray = state.array.filter(d => d.deviceId !== payload)
     state.array = newArray
+
 
 
     }
@@ -53,6 +53,8 @@ export const addDeviceInBasket = (deviceId) => async (dispath) => {
   const data = await BasketApi.addDeviceInBasket(deviceId)
   dispath(setDevice(data))
   dispath(getDevices())
+  dispath(getOneDevice(deviceId))
+
 }
 
 export const getBasket = (navigate) => async (dispath) => {
@@ -71,9 +73,10 @@ export const changeCounter =
     setDisabled(false)
   }
 
-  export const deleteFromBasket = (deviceId) => async dispath => {
+  export const deleteFromBasket = deviceId => async dispath => {
     await BasketApi.deleteFromBasket(deviceId)
     dispath(deleteDevice(deviceId))
     dispath(getDevices())
+    dispath(getOneDevice(deviceId))
   }
 

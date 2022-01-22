@@ -5,8 +5,6 @@ import { Loading } from './commons/Loading'
 import { ErrorMessage } from './commons/ErrorMessage'
 import { NavBar } from './components/Nav/NavBar'
 import { Routers } from './components/Routers'
-import { getDevices } from './store/reducer/devicesReducer'
-import { getTypesBrands } from './store/reducer/typesBrandsReducer'
 import { authMe } from './store/reducer/userReducer'
 
 const App = () => {
@@ -16,8 +14,6 @@ const App = () => {
 
   useEffect(() => {
     dispatch(authMe())
-    dispatch(getTypesBrands())
-    dispatch(getDevices())
   },[])
   
 
@@ -28,6 +24,7 @@ const App = () => {
       <Routers  {...user}/>
     </BrowserRouter>
     {user.isError ? <ErrorMessage isError={user.isError}/>: null}
+
 
   </div>
 }

@@ -18,7 +18,7 @@ router.post('/login',...validator, User.login)
 router.post('/logout',auth, User.logout)
 router.post('/raising_admin',auth, User.raisingAdmin)
 router.get('/activate/:link', User.activate)
-router.get('/refresh',auth, User.refresh)
+router.get('/refresh', User.refresh)
 
 
 

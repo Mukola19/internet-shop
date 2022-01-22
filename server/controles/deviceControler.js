@@ -4,17 +4,17 @@ const DeviceService = require("../service/device-service")
 class DeviceControler {
   async create(req, res, next) {
     try {
-      let { name, price, typeId, brandId, info } = req.body
+      let { name, price, typeId, brandId, infos } = req.body
       const { img }  = req.files
-      //  info = JSON.parse(info)
-       
+      infos = JSON.parse(infos)
       const nameImg = await FileService.add(img)
+    
       const device = await DeviceService.create({
         name,
         price,
         typeId,
         brandId,
-        info,
+        infos,
         img: nameImg,
       })
 
@@ -37,13 +37,14 @@ class DeviceControler {
     }
   }
 
-  async getOneDevice(req, res) {
+  async getOneDevice(req, res, next) {
     try {
-        const device = await DeviceService.getOneDevice(req.user.id,req.params.id)
+        const device = await DeviceService.getOneDevice(req.user.id, req.params.id)
         res.json(device)
 
     } catch (e) {
-      next(e)
+      // next(e)
+      console.log(e);
     }
   }
 }

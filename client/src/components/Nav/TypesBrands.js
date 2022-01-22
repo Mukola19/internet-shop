@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Dropdown } from '../../commons/Dropdown'
+import { Select } from '../../commons/Select'
 import { getDevices } from '../../store/reducer/devicesReducer'
 
 export const TypesBrands = () => {
@@ -16,13 +16,13 @@ export const TypesBrands = () => {
   }
 
   return (
-    <>
-      <Dropdown
+    <div style={{ display: 'flex', justifyContent: 'space-between', width:220 }}>
+      <Select
         title='Бренд'
         data={typesBrands.brands}
         onclick={brandOnClick}
       />
-      <Dropdown title='Тип' data={typesBrands.types} onclick={typeOnClick} />
-    </>
+      <Select title='Тип' data={typesBrands.types} onclick={typeOnClick} />
+      </div>
   )
 }

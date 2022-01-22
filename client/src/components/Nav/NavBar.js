@@ -3,7 +3,7 @@ import { Button, Container, Nav, Navbar } from "react-bootstrap"
 import {  useLocation, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { NavForm } from "./NavForm"
-import st from "./Nav.module.css"
+import st from "./Nav.module.scss"
 import { logout } from "../../store/reducer/userReducer"
 import { TypesBrands } from "./TypesBrands"
 import { getBasket } from "../../store/reducer/basketReducer"
@@ -13,27 +13,24 @@ export const NavBar = ({ isAuth, admin, adminMode }) => {
   const locatin = useLocation()
   const dispatch = useDispatch()
 
-  const exit = () => {
-    dispatch(logout(navigate))
-  }
- 
+
 
   return (
     <Navbar bg="secondary" expand="lg">
       <Container fluid>
-        <Navbar.Brand onClick={() => navigate("/shop")}>Store</Navbar.Brand>
+        <Navbar.Brand onClick={() => navigate("/shop")} className={st.link}>Store</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
 
-       {adminMode ? <h1>Адмін панель</h1> : <Nav
+       { adminMode ? <h1>Адмін панель</h1> : <Nav
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            {locatin.pathname !== '/auth' ?<>
+            {locatin.pathname !== '/auth' ?<div className={st.selectForm}>
             <TypesBrands />
             <NavForm />
-            </>: 
+            </div>: 
             null}
                 
           </Nav>}
@@ -50,7 +47,7 @@ export const NavBar = ({ isAuth, admin, adminMode }) => {
               Вхід
             </Button>
           ) : (
-            <Button variant="danger" onClick={exit}>
+            <Button variant="danger" onClick={() => dispatch(logout(navigate))}>
               Вихід
             </Button>
           )}

