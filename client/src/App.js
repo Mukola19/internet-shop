@@ -9,24 +9,25 @@ import { authMe } from './store/reducer/userReducer'
 
 const App = () => {
   const dispatch = useDispatch()
-  const user = useSelector(state => state.user)
-
+  const user = useSelector((state) => state.user)
 
   useEffect(() => {
     dispatch(authMe())
-  },[])
-  
+  }, [])
 
- return <div>
-    <BrowserRouter>
-    {user.isLoading ? <Loading/> : null}
-      <NavBar {...user}/>
-      <Routers  {...user}/>
-    </BrowserRouter>
-    {user.isError ? <ErrorMessage isError={user.isError}/>: null}
-
-
-  </div>
+  if (user.initialize) {
+    return (
+      <div>
+        <BrowserRouter>
+          {user.isLoading ? <Loading /> : null}
+          <NavBar {...user} />
+          <Routers {...user} />
+        </BrowserRouter>
+        {user.isError ? <ErrorMessage isError={user.isError} /> : null}
+      </div>
+    )
+  }
+  return <Loading />
 }
 
 export default App

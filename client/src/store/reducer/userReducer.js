@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { getDevices } from "./devicesReducer"
-import { userHttp } from "../../http/userHttp"
-import { getTypesBrands } from "./typesBrandsReducer"
+import { createSlice } from '@reduxjs/toolkit'
+import { getDevices } from './devicesReducer'
+import { UserApi } from '../../http/userApi'
+import { getTypesBrands } from './typesBrandsReducer'
 
 const initialState = {
   id: null,
@@ -12,11 +12,12 @@ const initialState = {
   isAith: false,
   adminMode: false,
   isLoading: false,
-  isError: ''
+  isError: '',
+  initialize: false
 }
 
 const userReleases = createSlice({
-  name: "userReleases",
+  name: 'userReleases',
   initialState,
   reducers: {
     initUser: (state, { payload }) => {
@@ -27,6 +28,7 @@ const userReleases = createSlice({
         state.client = payload.client
         state.isActivated = payload.isActivated
         state.isAuth = true
+        state.initialize = true
       } else {
         state.id = null
         state.email = null
@@ -34,69 +36,77 @@ const userReleases = createSlice({
         state.client = false
         state.isActivated = false
         state.isAuth = false
+        state.initialize = true
       }
     },
-    changeLoader:(state, { payload } ) => {
-        state.isLoading = payload
+    changeLoader: (state, { payload }) => {
+      state.isLoading = payload
     },
-    changeIsError:(state, { payload } ) => {
+    changeIsError: (state, { payload }) => {
       state.isError = payload
-  }
+    },
   },
 })
 
 const { actions, reducer } = userReleases
 
-export const { initUser , changeLoader, changeIsError} = actions
+export const { initUser, changeLoader, changeIsError } = actions
 
 export default reducer
 
-export const registration = (form, navigate) => async dispatch => {
+export const registration = (form, navigate) => async (dispatch) => {
   try {
     dispatch(changeLoader(true))
-    const user = await userHttp.registration(form)
+    const user = await UserApi.registration(form)
     dispatch(initUser(user))
     dispatch(getDevices())
     dispatch(changeLoader(false))
-    navigate("/shop")
+    navigate('/shop')
   } catch (e) {
     let error = e.response.data.message
-    dispatch(changeIsError(error ? error :'Ops'))
+    dispatch(changeIsError(error ? error : 'Ops'))
   }
-
 }
 
-export const login = (form, navigate) => async dispatch => {
+export const login = (form, navigate) => async (dispatch) => {
   try {
     dispatch(changeLoader(true))
-    const user = await userHttp.login(form)
+    const user = await UserApi.login(form)
     dispatch(initUser(user))
     dispatch(getDevices())
-    navigate("/shop")
+    navigate('/shop')
     dispatch(changeLoader(false))
   } catch (e) {
     let error = e.response.data.message
-    dispatch(changeIsError(error ? error :'Ops'))
+    dispatch(changeIsError(error ? error : 'Ops'))
   }
- 
-
 }
 
-export const logout = (navigate) => async dispatch => {
-  dispatch(changeLoader(true))
-  const data = await userHttp.logout()
-  dispatch(initUser())
-  dispatch(getDevices())
-  dispatch(changeLoader(false))
-  navigate("/auth")
+export const logout = (navigate) => async (dispatch) => {
+  try {
+    dispatch(changeLoader(true))
+    const data = await UserApi.logout()
+    dispatch(initUser())
+    dispatch(getDevices())
+    dispatch(changeLoader(false))
+    navigate('/auth')
+  } catch (e) {
+    alert(e.response.data.message)
+  }
 }
 
-export const authMe = () => async dispatch => {
-  dispatch(changeLoader(true))
-  const data = await userHttp.authMe()
-  dispatch(initUser(data))
-  dispatch(getTypesBrands())
-  dispatch(getDevices())
-  dispatch(changeLoader(false))
-
+export const authMe = () => async (dispatch) => {
+  try {
+    dispatch(changeLoader(true))
+    const data = await UserApi.authMe()
+    dispatch(initUser(data))
+    dispatch(getTypesBrands())
+    dispatch(getDevices())
+    dispatch(changeLoader(false))
+  } catch (e) {
+    dispatch(getTypesBrands())
+    dispatch(getDevices())
+    dispatch(initUser())
+    dispatch(changeLoader(false))
+  }
 }

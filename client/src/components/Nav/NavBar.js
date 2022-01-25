@@ -3,10 +3,10 @@ import { Button, Container, Nav, Navbar } from "react-bootstrap"
 import {  useLocation, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { NavForm } from "./NavForm"
-import st from "./Nav.module.scss"
 import { logout } from "../../store/reducer/userReducer"
 import { TypesBrands } from "./TypesBrands"
 import { getBasket } from "../../store/reducer/basketReducer"
+import st from "./Nav.module.scss"
 
 export const NavBar = ({ isAuth, admin, adminMode }) => {
   let navigate = useNavigate()
@@ -35,7 +35,7 @@ export const NavBar = ({ isAuth, admin, adminMode }) => {
                 
           </Nav>}
 
-          {isAuth ? <Button variant="secondary" onClick={() => dispatch(getBasket(navigate))}>Корзина</Button> : null}
+          {isAuth ? <Button variant="secondary" onClick={() => navigate('/basket')}>Корзина</Button> : null}
 
 
           {admin && isAuth ? (

@@ -3,12 +3,24 @@ import { Button, Row, Image, Container, ListGroup } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import { BasketCounter } from "../components/BasketCounter"
-import { changeCounter, deleteFromBasket} from "../store/reducer/basketReducer"
+import { changeCounter, deleteFromBasket, getBasket} from "../store/reducer/basketReducer"
 import st from "./Basket.module.scss"
 
 export const BasketPage = () => {
   const basket = useSelector((state) => state.basket.array)
   const dispatch = useDispatch()
+
+
+
+useEffect(() => {
+  dispatch(getBasket())
+}, [])
+
+
+
+
+
+
   return (
     <Container>
       <Row className={st.row}>

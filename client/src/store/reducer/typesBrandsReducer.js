@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { typesBrandsApi } from '../../http/typesBrandsApi'
+import { TypesBrandsApi } from '../../http/typesBrandsApi'
 import { changeLoader } from './userReducer'
 
 const initialState = {
@@ -32,7 +32,7 @@ export default reducer
 
 export const getTypesBrands = () => async dispath => {
   dispath(changeLoader(true))
-  const data = await typesBrandsApi.getTypesBrands()
+  const data = await TypesBrandsApi.getTypesBrands()
   dispath(setTypesBrands(data))
   dispath(changeLoader(false))
 
@@ -40,7 +40,7 @@ export const getTypesBrands = () => async dispath => {
 
 export const createType = (form) => async dispath => {
   try {
-    const type = await typesBrandsApi.createType(form)
+    const type = await TypesBrandsApi.createType(form)
     dispath(setType(type))
   } catch (e) {
     console.error(e)
@@ -49,7 +49,7 @@ export const createType = (form) => async dispath => {
 
 export const createBrand= (form) => async dispath => {
   try {
-    const brand = await typesBrandsApi.createBrand(form)
+    const brand = await TypesBrandsApi.createBrand(form)
     dispath(setBrand(brand))
   } catch (e) {
     console.error(e)

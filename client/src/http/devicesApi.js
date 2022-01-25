@@ -1,7 +1,8 @@
 import { $host, $authHost } from './index'
 
-export const devicesApi = {
-  async getDevices(page, limit, brandId, typeId) {
+
+export class DevicesApi {
+  static async getDevices(page = 1, limit = 5, brandId, typeId) {
     const res = await $authHost.get('/device', {
       params: {
         limit,
@@ -11,9 +12,9 @@ export const devicesApi = {
       },
     })
     return res.data
-  },
+  }
 
-  async createDevice({ name, price, typeId, brandId, infos, img }) {
+  static async createDevice({ name, price, typeId, brandId, infos, img }) {
     const formData = new FormData()
     formData.append('name', name)
     formData.append('price', price)
@@ -22,16 +23,12 @@ export const devicesApi = {
     formData.append('infos', JSON.stringify(infos))
     formData.append('img', img[0])
 
-  const res = await  $authHost.post('/device', formData)
+    const res = await $authHost.post('/device', formData)
     return res.data
-  },
+  }
 
-
-  async getOneDevice(id) {
+  static async getOneDevice(id) {
     const res = await $authHost.get(`/device/${id}`)
     return res.data
-  },
+  }
 }
-
-
-

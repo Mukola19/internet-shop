@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Form, FormControl } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import cl from 'classname'
-import st from './Nav.module.css'
+import st from './Nav.module.scss'
 import { useDispatch } from 'react-redux'
 import { $authHost } from '../../http/index'
 

@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { BasketApi } from '../../http/basketApi'
-import { devicesApi } from '../../http/devicesApi'
 import { getDevices, getOneDevice } from './devicesReducer'
 import { changeLoader } from './userReducer'
 
@@ -57,11 +56,10 @@ export const addDeviceInBasket = (deviceId) => async (dispath) => {
 
 }
 
-export const getBasket = (navigate) => async (dispath) => {
+export const getBasket = () => async (dispath) => {
   dispath(changeLoader(true))
   const data = await BasketApi.getBasket()
   dispath(setDevices(data))
-  navigate('/basket')
   dispath(changeLoader(false)) 
 }
 

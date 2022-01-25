@@ -8,11 +8,11 @@ export const TypesBrands = () => {
   const dispatch = useDispatch()
 
   const typeOnClick = typeId => {
-    dispatch(getDevices( typeId, null))
+    dispatch(getDevices( typeId ))
   }
 
   const brandOnClick = brandId => {
-    dispatch(getDevices(null, brandId ))
+    dispatch(getDevices( null, brandId ))
   }
 
   return (
