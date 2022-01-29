@@ -21,7 +21,7 @@ const schema = yup.object().shape({
   price: yup.number().required(' Поле обовʼязково').min(1, 'Поле обовʼязково'),
 })
 
-export const DeviceForm = ({ onsubmit, isActive }) => {
+export const DeviceForm = ({ create }) => {
   const typesBrands = useSelector((state) => state.typesBrands)
   const [typeId, setTypeId] = useState(0)
   const [brandId, setBrandId] = useState(0)
@@ -38,10 +38,9 @@ export const DeviceForm = ({ onsubmit, isActive }) => {
   }
 
   const localSubmit = data => {
-    onsubmit({ ...data, typeId, brandId, infos })
+    create({ ...data, typeId, brandId, infos })
   }
 
-  if (isActive === 1) {
     return (
       <Form onSubmit={handleSubmit(localSubmit)}>
         <div
@@ -52,12 +51,12 @@ export const DeviceForm = ({ onsubmit, isActive }) => {
           }}
         >
           <Select
-            data={typesBrands.types}
+            data={typesBrands.types.array}
             title='Тип'
             onclick={(id) => setTypeId(id)}
           />
           <Select
-            data={typesBrands.brands}
+            data={typesBrands.brands.array}
             title='Бренд'
             onclick={(id) => setBrandId(id)}
           />
@@ -91,8 +90,6 @@ export const DeviceForm = ({ onsubmit, isActive }) => {
     )
   }
 
-  return null
-}
 
 
 

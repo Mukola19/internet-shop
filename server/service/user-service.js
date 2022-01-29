@@ -97,15 +97,26 @@ class UserService {
     return { ...tokens, user: userDto }
   }
 
-  async raisingAdmin(codeKey, user) {
-    if (codeKey === process.env.SECRET_CODE_KEY) {
-      const data = await Roles.update({ admin: true }, { where: { userId: user.id } })
+  async loginAdmin(login, password, user) {
+    if (login === process.env.ADMIN_LOGIN &&password === process.env.ADMIN_PASSWORD ) {
+      await Roles.update({ admin: true }, { where: { userId: user.id } })
       user.admin = true
       const tokens = tokenService.generateTokens({ ...user })
       await tokenService.saveToken(user.id, tokens.refreshToken)
       return { ...tokens, user }
     }
+    return ApiError.err('Ви немаєте доступу')
   }
+
+
+  async getUsers() {
+      const users =  await User.findAndCountAll()
+      if(!users) return ApiError.err('Користувачів нема')
+      return users
+  }
+
+
+  
 }
 
 module.exports = new UserService()

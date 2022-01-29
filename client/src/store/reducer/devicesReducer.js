@@ -19,10 +19,6 @@ const devicesReleases = createSlice({
       state.array = payload.rows
       state.count = payload.count
     },
-    setDevice: (state, { payload }) => {
-      state.array.push(payload)
-      state.count++
-    },
     searchDevice: (state, { payload }) => {
       state.array.push(payload)
       state.count++
@@ -47,11 +43,6 @@ export const getDevices = (typeId, brandId, page ) => async (dispath, getState) 
   dispath(changeLoader(false))
 }
 
-
-export const createDevice = form => async dispath => {
-  const data = await DevicesApi.createDevice(form)
-  dispath(setDevice(data))
-}
 
 export const getOneDevice = id => async dispath => {
   dispath(changeLoader(true))

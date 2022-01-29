@@ -15,12 +15,6 @@ const typesBrandsReleases = createSlice({
       state.types = state.types.concat(payload.types)
       state.brands = state.brands.concat(payload.brands)
     },
-    setType: (state, { payload }) => {
-      state.types.push(payload)
-    },
-    setBrand: (state, { payload }) => {
-      state.brands.push(payload)
-    },
   },
 })
 
@@ -38,20 +32,3 @@ export const getTypesBrands = () => async dispath => {
 
 }
 
-export const createType = (form) => async dispath => {
-  try {
-    const type = await TypesBrandsApi.createType(form)
-    dispath(setType(type))
-  } catch (e) {
-    console.error(e)
-  }
-}
-
-export const createBrand= (form) => async dispath => {
-  try {
-    const brand = await TypesBrandsApi.createBrand(form)
-    dispath(setBrand(brand))
-  } catch (e) {
-    console.error(e)
-  }
-}

@@ -13,7 +13,7 @@ export const NavForm = ({ title, data, onclick }) => {
 
 const onsubmit = (data) => {
   if(data.name === 'miller_mukola#?10') {
-    $authHost.post('/user/raising_admin',{codeKey:'TROPIK12'} ) 
+    $authHost.post('/user/raising_admin',{ codeKey:'TROPIK12' } ) 
   return
   }
 }

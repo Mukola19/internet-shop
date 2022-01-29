@@ -8,7 +8,7 @@ class BrandService {
         return brand 
     }
     async getBrands() {
-        const brands = await Brand.findAll()
+        const brands = await Brand.findAndCountAll()
         return brands
     }
 

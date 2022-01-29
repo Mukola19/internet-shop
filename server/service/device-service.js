@@ -7,11 +7,10 @@ class DeviceService {
       throw ApiError.err(400, "Форма не пройшла валідацію")
     }
     let { name, price, typeId, brandId, infos, img } = data
-    console.log(infos);
-
     price = +price
     typeId = +typeId
     brandId = +brandId
+
 
     const device = await Device.create({ name, price, typeId, brandId, img })
 

@@ -8,7 +8,7 @@ class TypeService {
         return type 
     }
     async getTypes () {
-        const types = await Type.findAll()
+        const types = await Type.findAndCountAll()
         return types
     }
 

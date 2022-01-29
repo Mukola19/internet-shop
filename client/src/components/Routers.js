@@ -11,14 +11,6 @@ export const Routers = ({ isAuth, admin }) => {
   return (
     <Routes>
       {isAuth ? <Route path="/basket" element={<BasketPage />} /> : null}
-
-      {admin ? (
-        <>
-          <Route path="/management" element={<ManagementPage />}/>
-        
-          </>
-      ) : null}
-
       <Route path="/shop" element={<ShopPage />} />
       <Route path="/device/:id" element={<DevicePage />} />
       <Route path="/auth" element={<AuthPage />} />

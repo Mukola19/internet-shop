@@ -13,12 +13,5 @@ export class TypesBrandsApi {
     }
   }
 
-  static async createType(form) {
-    const res = await $authHost.post('/type', form)
-    return res.data
-  }
-  static async createBrand(form) {
-    const res = await $authHost.post('/brand', form)
-    return res.data
-  }
+
 }
