@@ -1,0 +1,42 @@
+.listGroup {
+  margin-left: 10px;
+  cursor: pointer;
+  background-color: rgb(99, 99, 99);
+  width: 200px;
+  margin: 0px;
+  position: relative;
+  padding: 0.4em 0em 0.4em 0em;
+  border-radius: 7px;
+  top: 5px;
+  left: 5px;
+  display: table;
+  
+
+  h5{
+    margin-left: 16px;
+    margin-top: 5px;
+    color: white;
+  }
+
+  button {
+    padding: 5px;
+    padding-left: 15px;
+    font-size: 600;
+    font-size: 15px;
+    margin-left: 2px;
+    background-color: rgb(99, 99, 99);
+    border: none;
+    display: flex;
+    width: 98%;
+    color: white;
+  }
+
+  button:hover {
+    background-color: rgb(88, 88, 88);
+  }
+
+  .active {
+    background-color: rgb(88, 88, 88);
+    // background-color: #222;
+  }
+}

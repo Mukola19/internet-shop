@@ -13,7 +13,7 @@ const router = Router()
 router.post('/',roleCheck({ admin: true }), Device.create)
 router.get('/',receiptId, Device.getDevice)
 router.get('/:id',receiptId, Device.getOneDevice)
-
+router.post('/impression',auth, Device.addImpression)
 
 
 

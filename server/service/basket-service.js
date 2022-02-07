@@ -39,7 +39,6 @@ class BasketService {
     let basketDevice = await BasketDevice.findOne({
       where: { deviceId, basketId },
     })
-    console.log({ basketDevice, deviceId, basketId });
     if (!basketDevice) {
       return ApiError.err("Ops")
     }

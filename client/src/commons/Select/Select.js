@@ -6,16 +6,16 @@ export const Select = ({ title, data, onclick }) => {
   const [active, setActive] = useState("")
 
   const toChoose = ({ name, id }) => {
-    onclick(id)
+    onclick( id )
     setActive(name)
   }
   return (
     <Dropdown className={st.drop} >
-      <Dropdown.Toggle variant="secondary" id="dropdown-basic" className={st.toggle}>
+      <Dropdown.Toggle variant="outline-link" id="dropdown-basic" className={st.toggle}>
         <span className={st.toggleSpan}>{active || title}</span>
       </Dropdown.Toggle>
 
-      <Dropdown.Menu>
+      <Dropdown.Menu className={st.toggleMenu}>
         <Dropdown.Item onClick={() => toChoose({ id: null, name: title })}>
           Відмінити
         </Dropdown.Item>

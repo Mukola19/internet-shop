@@ -1,0 +1,81 @@
+.rating {
+  margin-top: 30px;
+}
+
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+  margin-bottom: 10px;
+}
+
+.form {
+  button {
+    margin-left: 170px;
+  }
+}
+
+// rating
+
+.ratingArea {
+  overflow: hidden;
+  width: 265px;
+  margin: 0 auto;
+  margin-right: 130px;
+  margin-bottom: 20px;
+}
+.ratingArea:not(:checked) > input {
+  display: none;
+}
+.ratingArea:not(:checked) > label {
+  float: right;
+  width: 42px;
+  padding: 0;
+  cursor: pointer;
+  font-size: 32px;
+  line-height: 32px;
+  color: lightgrey;
+  text-shadow: 1px 1px #bbb;
+}
+.ratingArea:not(:checked) > label:before {
+  content: "★";
+}
+.ratingArea > input:checked ~ label {
+  color: gold;
+  text-shadow: 1px 1px #c60;
+}
+.ratingArea:not(:checked) > label:hover,
+.ratingArea:not(:checked) > label:hover ~ label {
+  color: gold;
+}
+.ratingArea > input:checked + label:hover,
+.ratingArea > input:checked + label:hover ~ label,
+.ratingArea > input:checked ~ label:hover,
+.ratingArea > input:checked ~ label:hover ~ label,
+.ratingArea > label:hover ~ input:checked ~ label {
+  color: gold;
+  text-shadow: 1px 1px goldenrod;
+}
+.rateArea > label:active {
+  position: relative;
+}
+
+
+//response
+
+.response {
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 5px;
+  margin-bottom: 5px;
+  width: 500px;
+  padding: 10px;
+  p{
+    font-size: 16px;
+    padding: 0px;
+  }
+  p{
+  }
+
+}

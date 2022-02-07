@@ -60,11 +60,12 @@ export const registration = (form, navigate) => async (dispatch) => {
     const user = await UserApi.registration(form)
     dispatch(initUser(user))
     dispatch(getDevices())
-    dispatch(changeLoader(false))
     navigate('/shop')
+    dispatch(changeLoader(false))
+
   } catch (e) {
     let error = e.response.data.message
-    dispatch(changeIsError(error ? error : 'Ops'))
+    dispatch(changeIsError(error ? error : ''))
   }
 }
 
@@ -78,7 +79,7 @@ export const login = (form, navigate) => async (dispatch) => {
     dispatch(changeLoader(false))
   } catch (e) {
     let error = e.response.data.message
-    dispatch(changeIsError(error ? error : 'Ops'))
+    dispatch(changeIsError(error ? error : ''))
   }
 }
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import cl from "classname";
-import st from "./BasketCounter.module.css";
+import st from "./Counter.module.css";
 import { Button } from "react-bootstrap";
 
 export const BasketCounter = ({ count, changeCounter }) => {

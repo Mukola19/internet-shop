@@ -2,6 +2,8 @@ import React, {  useEffect } from 'react'
 import { Button, Col, Row, Image, Container } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { Rating } from '../components/Rating/Rating'
+import { StaticRating } from '../components/Rating/StaticRating'
 import { addDeviceInBasket,  deleteFromBasket } from '../store/reducer/basketReducer'
 import { getOneDevice } from '../store/reducer/devicesReducer'
 import st from './Device.module.css'
@@ -17,7 +19,7 @@ export const DevicePage = () => {
     dispatch(getOneDevice(id))
   }, [id])
 
-  const onclick = (id) => {
+  const onclick = () => {
     if (isAuth) {
       device.basketDevice
         ? dispatch(deleteFromBasket(id))
@@ -43,6 +45,7 @@ export const DevicePage = () => {
                 <h2>{device.name}</h2>
                 <p>{device.price}</p>
               </div>
+              <StaticRating rating={device.rating}/>
               <Button
                 variant={device.basketDevice ? 'danger' : 'secondary'}
                 className={st.button}
@@ -50,7 +53,10 @@ export const DevicePage = () => {
               >
                 {device.basketDevice ? 'Видалити' : 'В корзину'}
               </Button>
+
             </div>
+            <Rating rating={device.rating}/>
+
           </Col>
           <Col md={{ span: 4, offset: 3 }}>
             <Container>

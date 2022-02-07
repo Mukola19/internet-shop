@@ -5,7 +5,7 @@ class ApiError extends Error {
     this.message = message
   }
 
-  static err( message) {
+  static err(message) {
     return new ApiError(400, message)
   }
 

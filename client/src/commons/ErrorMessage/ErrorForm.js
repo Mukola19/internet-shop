@@ -7,7 +7,8 @@ export const ErrorForm = ({ name, errors }) => (
     errors={errors}
     render={({ message }) => (
       <span style={{ color: 'red' }}>
-        {message.length > 30 ? null : message}
+        {/* {message.length > 30 ? null : message} */}
+        {message}
       </span>
     )}
   />

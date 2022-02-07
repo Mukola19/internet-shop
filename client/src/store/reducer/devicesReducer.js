@@ -1,18 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { DevicesApi } from "../../http/devicesApi"
-import { changeLoader } from "./userReducer"
-
+import { createSlice } from '@reduxjs/toolkit'
+import { DevicesApi } from '../../http/devicesApi'
+import { changeLoader, changeIsError } from './userReducer'
 
 const initialState = {
   array: [],
-  count: 10,
+  count: 0,
   page: 1,
   limit: 5,
-  device: {}
+  device: {},
 }
 
 const devicesReleases = createSlice({
-  name: "devicesReleases",
+  name: 'devicesReleases',
   initialState,
   reducers: {
     setDevices: (state, { payload }) => {
@@ -26,29 +25,63 @@ const devicesReleases = createSlice({
     setOne: (state, { payload }) => {
       state.device = payload
     },
+    changePage: (state, { payload }) => {
+      state.page = payload
+    },
+    setImpression: (state, { payload }) => {
+      state.device.impression.push(payload.impression)
+      state.device.rating = payload.rating
+    },
   },
 })
 
 const { actions, reducer } = devicesReleases
 
-export const { setDevices, setDevice,setOne } = actions
+export const { setDevices, setDevice, setOne, changePage, setImpression } =
+  actions
 
 export default reducer
 
-export const getDevices = (typeId, brandId, page ) => async (dispath, getState) => {
-  dispath(changeLoader(true))
-  const { limit } = getState().devices
-  const data = await DevicesApi.getDevices(page, limit, brandId, typeId)
-  dispath(setDevices(data))
-  dispath(changeLoader(false))
+export const getDevices =
+  (typeId, brandId, page) => async (dispatch, getState) => {
+    try {
+      dispatch(changeLoader(true))
+      const { limit } = getState().devices
+      const data = await DevicesApi.getDevices(page, limit, brandId, typeId)
+      dispatch(changePage(page))
+      dispatch(setDevices(data))
+      dispatch(changeLoader(false))
+    } catch (e) {
+    let error = e.response.data.message
+    dispatch(changeIsError(error ? error : ''))
+    }
+  }
+
+export const getOneDevice = (id) => async dispatch => {
+  try {
+    dispatch(changeLoader(true))
+    const device = await DevicesApi.getOneDevice(id)
+    dispatch(setOne(device))
+    dispatch(changeLoader(false))
+  } catch (e) {
+    let error = e.response.data.message
+    dispatch(changeIsError(error ? error : ''))
+  }
 }
 
 
-export const getOneDevice = id => async dispath => {
-  dispath(changeLoader(true))
-  const device = await DevicesApi.getOneDevice(id)
-  dispath(setOne(device))
-  dispath(changeLoader(false))
+export const addImpression = (form, onHide) => async dispatch => {
+  try {
+    dispatch(changeLoader(true))
+    const data = await DevicesApi.addImpression(form)
+    dispatch(setImpression(data))
+    dispatch(changeLoader(false))
+    onHide(false)
+  } catch (e) {
+    let error = e.response.data.message
+    dispatch(changeIsError(error ? error : ''))
+    dispatch(changeLoader(false))
+    onHide(false)
 
+  }
 }
-

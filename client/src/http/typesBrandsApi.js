@@ -1,10 +1,9 @@
-import { $host, $authHost } from './index'
-
+import { $host, $authHost } from "./index"
 
 export class TypesBrandsApi {
   static async getTypesBrands() {
-    const resType = await $host.get('/type')
-    const resBrand = await $host.get('/brand')
+    const resType = await $host.get("/type")
+    const resBrand = await $host.get("/brand")
 
     await Promise.all([resType, resBrand])
     return {
@@ -12,6 +11,4 @@ export class TypesBrandsApi {
       brands: resBrand.data,
     }
   }
-
-
 }

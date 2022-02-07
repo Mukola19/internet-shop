@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Form, FormControl } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import cl from 'classname'
@@ -8,26 +8,33 @@ import { $authHost } from '../../http/index'
 
 
 export const NavForm = ({ title, data, onclick }) => {
-  const { register, handleSubmit } = useForm()
+  const [input, setInput] = useState('')
   const dispatch = useDispatch()
 
-const onsubmit = (data) => {
-  if(data.name === 'miller_mukola#?10') {
-    $authHost.post('/user/raising_admin',{ codeKey:'TROPIK12' } ) 
-  return
-  }
+const onchange = text => {
+  console.log(text)
+  setInput(text)
 }
 
   return (
-    <Form className={cl('d-flex', st.form)} onSubmit={handleSubmit(onsubmit)}>
+    <>
+    <Form className={cl('d-flex', st.form)} >
       <FormControl
+      value={input}
         type='search'
         placeholder='Search'
         className='me-2'
         aria-label='Search'
-        {...register('name')}
+        onChange={e => onchange(e.target.value)}
       />
-      <Button variant='secondary' type='submit'>Search</Button>
+      <Button variant="outline-light">Search</Button>
     </Form>
+
+
+      {/* <ul className={st.searchList}>
+        <li>sfsdfsdfsdf</li>
+        <hr/>
+      </ul> */}
+    </>
   )
 }

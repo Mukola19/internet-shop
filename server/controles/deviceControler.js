@@ -1,5 +1,6 @@
 const FileService = require("../service/file-service")
 const DeviceService = require("../service/device-service")
+const ImpressionService = require("../service/impression-service")
 
 class DeviceControler {
   async create(req, res, next) {
@@ -47,6 +48,26 @@ class DeviceControler {
       console.log(e);
     }
   }
+
+  async addImpression(req, res, next) {
+    try {
+      const data = req.body
+      data.userId = req.user.id
+      data.email = req.user.email
+        const impression = await ImpressionService.addImpression(data)
+        res.json(impression)
+
+    } catch (e) {
+      next(e)
+      // console.log(e);
+    }
+  }
+
+  
+  
+
 }
+
+
 
 module.exports = new DeviceControler()

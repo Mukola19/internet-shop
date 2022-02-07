@@ -19,4 +19,12 @@ export class DevicesApi {
     const res = await $authHost.get(`/device/${id}`)
     return res.data
   }
+
+
+  static async addImpression(form) {
+    const res = await $authHost.post(`/device/impression`, form)
+    return res.data
+  }
+
+  
 }

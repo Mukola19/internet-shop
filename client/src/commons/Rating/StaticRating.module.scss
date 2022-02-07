@@ -1,0 +1,40 @@
+.ratingResult {
+	width: 265px;
+	margin: 0 auto;
+	margin-left: 96px;
+}
+.ratingResult span {
+	padding: 0;
+	font-size: 32px;
+	margin: 0 3px;
+	line-height: 1;
+	color: lightgrey;
+	text-shadow: 1px 1px #bbb;
+}
+.ratingResult > span:before {
+	content: '★';
+}
+.ratingResult > span.active {
+	color: gold;
+	text-shadow: 1px 1px #c60;
+}
+
+
+//========================
+
+.ratingMini {
+	display: inline-block;
+	font-size: 0;
+}
+.ratingMini span {
+	padding: 0;
+	font-size: 20px;
+	line-height: 1;
+	color: lightgrey;
+}
+.ratingMini > span:before {
+	content: '★';
+}
+.ratingMini > span.active {
+	color: gold;
+}

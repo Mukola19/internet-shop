@@ -48,7 +48,7 @@ export default reducer
 
 
 
-export const addDeviceInBasket = (deviceId) => async (dispath) => {
+export const addDeviceInBasket = deviceId => async dispath => {
   const data = await BasketApi.addDeviceInBasket(deviceId)
   dispath(setDevice(data))
   dispath(getDevices())
@@ -56,7 +56,7 @@ export const addDeviceInBasket = (deviceId) => async (dispath) => {
 
 }
 
-export const getBasket = () => async (dispath) => {
+export const getBasket = () => async dispath => {
   dispath(changeLoader(true))
   const data = await BasketApi.getBasket()
   dispath(setDevices(data))
@@ -64,11 +64,16 @@ export const getBasket = () => async (dispath) => {
 }
 
 export const changeCounter =
-  (deviceId, mark, setDisabled) => async (dispath) => {
-    setDisabled(true)
-    const data = await BasketApi.changeCounter(deviceId, mark)
-    dispath(setCount(data))
-    setDisabled(false)
+  (deviceId, mark, setDisabled) => async dispath => {
+    try {
+      setDisabled(true)
+      const data = await BasketApi.changeCounter(deviceId, mark)
+      dispath(setCount(data))
+      setDisabled(false)
+    } catch (e) {
+      setDisabled(false)
+    }
+   
   }
 
   export const deleteFromBasket = deviceId => async dispath => {

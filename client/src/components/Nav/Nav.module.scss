@@ -1,23 +1,77 @@
+.nav {
+  background-color: #222;
+  border-bottom: rgb(255, 255, 255) ridge 2px;
 
-button {
+  button {
     margin-left: 10px;
-}
+    font-weight: 600;
 
+    &:hover {
+      box-shadow: none;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
 
 .dropdown {
-    margin-left: 5px;
-}
-
-.form{
-    margin-left: 20px;
+  margin-left: 5px;
 }
 
 .link {
-    cursor: pointer;
+  cursor: pointer;
+  color: aliceblue;
+  font-size: 24px;
+  text-decoration: none;
+  &:hover {
+    text-shadow: 0.5px 0.5px 1px aliceblue;
+    color: aliceblue;
+  }
 }
 
 .selectForm {
-    display: flex;
-    justify-content: space-between;
-    width: 720px;
+  display: flex;
+  justify-content: space-between;
+  width: 700px;
+}
+
+.form {
+  margin-left: 20px;
+  width: 320px;
+  input:focus {
+    box-shadow: none;
+  }
+  input {
+    border: none;
+  }
+}
+
+.searchList {
+  position: absolute;
+  top: 54px;
+  left: 455px;
+  background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity));
+  z-index: 3;
+  width: 229.19px;
+  border-radius: 2px;
+  list-style: none;
+  padding-bottom: 10px;
+  padding-left: 20px;
+
+  li {
+    padding: 3px;
+    font-family: cursive;
+    cursor: pointer;
+    color: rgb(48, 48, 48);
+    font-size: 15px;
+    &:hover {
+      color: rgb(34, 33, 33);
+    }
+  }
+
+  hr {
+    padding: 0px;
+    margin: 5px 20px 5px 0px;
+  }
 }

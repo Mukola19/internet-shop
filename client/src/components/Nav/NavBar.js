@@ -1,11 +1,10 @@
 import React, { useEffect } from "react"
 import { Button, Container, Nav, Navbar } from "react-bootstrap"
-import {  useLocation, useNavigate } from "react-router-dom"
+import {  NavLink, useLocation, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { NavForm } from "./NavForm"
 import { logout } from "../../store/reducer/userReducer"
 import { TypesBrands } from "./TypesBrands"
-import { getBasket } from "../../store/reducer/basketReducer"
 import st from "./Nav.module.scss"
 
 export const NavBar = ({ isAuth, admin, adminMode }) => {
@@ -16,13 +15,14 @@ export const NavBar = ({ isAuth, admin, adminMode }) => {
 
 
   return (
-    <Navbar bg="secondary" expand="lg">
+    <Navbar  expand="lg" className={st.nav} >
       <Container fluid>
-        <Navbar.Brand onClick={() => navigate("/shop")} className={st.link}>Store</Navbar.Brand>
+        <NavLink to='/shop' className={st.link}>Store</NavLink>
+        {/* <Navbar.Brand onClick={() => navigate("/shop")} className={st.link} >Store</Navbar.Brand> */}
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
 
-       { adminMode ? <h1>Адмін панель</h1> : <Nav
+          <Nav
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: "100px" }}
             navbarScroll
@@ -33,21 +33,19 @@ export const NavBar = ({ isAuth, admin, adminMode }) => {
             </div>: 
             null}
                 
-          </Nav>}
+          </Nav>
 
-          {isAuth ? <Button variant="secondary" onClick={() => navigate('/basket')}>Корзина</Button> : null}
+          {isAuth ? <Button variant="outline-light" onClick={() => navigate('/basket')}>Корзина</Button> : null}
 
 
-          {admin && isAuth ? (
-            <Button variant="secondary" onClick={() => navigate('/management')}>Адмін панель</Button>
-          ) : null}
+ 
 
           {!isAuth ? (
-            <Button variant="success" onClick={() => navigate("/auth")}>
+            <Button variant="outline-success" onClick={() => navigate("/auth")}>
               Вхід
             </Button>
           ) : (
-            <Button variant="danger" onClick={() => dispatch(logout(navigate))}>
+            <Button variant="outline-danger" onClick={() => dispatch(logout(navigate))}>
               Вихід
             </Button>
           )}

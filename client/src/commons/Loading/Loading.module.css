@@ -1,0 +1,7 @@
+.spiner {
+  position: absolute;
+  /* margin: 0 auto; */
+  z-index: 3;
+  left: 47%;
+  top: 50%;
+}
