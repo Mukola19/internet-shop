@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Select } from "../../commons/Select"
+import { Select } from "../../commons/Select/Select"
 import { getDevices } from "../../store/reducer/devicesReducer"
 import { receiptDevices } from "../../store/reducer/typesBrandsReducer"
 

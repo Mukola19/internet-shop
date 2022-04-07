@@ -1,30 +1,28 @@
-import React from "react"
-import { NavLink, useNavigate } from "react-router-dom"
-import { Button, Card, Col, Image } from "react-bootstrap"
-import { useDispatch } from "react-redux"
-import cl from "classname"
+import React from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { Col } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
+import { addDeviceInBasket, deleteFromBasket } from '../../store/reducer/basketReducer'
+import st from './DeviceList.module.scss'
+import { StaticRating } from '../../commons/Rating/StaticRating'
+import img from '../../img/cart.ico'
 
-import {
-  addDeviceInBasket,
-  deleteFromBasket,
-} from "../../store/reducer/basketReducer"
-import st from "./DeviceList.module.scss"
-import { StaticRating } from "../../commons/Rating/StaticRating"
-import img from "../img/cart.ico"
-
-export const DeviceList = ({ name, price, img, id, basketDevice, rating }) => {
+export const DeviceList = ({ name, price, img, id, basketDevice, rating , props}) => {
   const dispatch = useDispatch()
   let navigate = useNavigate()
 
-  const onclick = (e) => {
+  const onclick = e => {
     e.preventDefault()
 
     if (basketDevice) {
-      return dispatch(deleteFromBasket(id))
+      return navigate('/basket')
     }
 
     dispatch(addDeviceInBasket(id))
   }
+
+
+
 
   return (
     <Col md={3}>
@@ -35,12 +33,12 @@ export const DeviceList = ({ name, price, img, id, basketDevice, rating }) => {
           </div>
 
           <div className={st.loopAction}>
-            <NavLink to={"/device/" + id} className="addToCart">
+            <NavLink to={'/device/' + id} className='addToCart'>
               Перегляд
             </NavLink>
 
             <a className={st.loopAddToCart} onClick={onclick} >
-              {basketDevice ? "З корзини" : "В корзину"}
+              {basketDevice ? 'Перейти до корзини' : 'Добавити в корзину'}
             </a>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { receiptDevices } from "../store/reducer/typesBrandsReducer"
+import { receiptDevices } from "../../store/reducer/typesBrandsReducer"
 import st from "./TypesList.module.scss"
 
 export const TypesList = () => {

@@ -30,6 +30,7 @@ const basketReleases = createSlice({
     deleteDevice: (state, { payload }) => {
     const newArray = state.array.filter(d => d.deviceId !== payload)
     state.array = newArray
+    state.allCount--
 
 
 
@@ -63,12 +64,11 @@ export const getBasket = () => async dispath => {
   dispath(changeLoader(false)) 
 }
 
-export const changeCounter =
-  (deviceId, mark, setDisabled) => async dispath => {
+export const changeCounter = ({ setDisabled, ...data }) => async dispath => {
     try {
       setDisabled(true)
-      const data = await BasketApi.changeCounter(deviceId, mark)
-      dispath(setCount(data))
+      const count = await BasketApi.changeCounter(data)
+      dispath(setCount(count))
       setDisabled(false)
     } catch (e) {
       setDisabled(false)

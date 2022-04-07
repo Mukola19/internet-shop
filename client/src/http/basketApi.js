@@ -11,10 +11,8 @@ export class BasketApi {
     return res.data
   }
 
-  static async changeCounter(deviceId, mark) {
-    const res = await $authHost.put('/basket/counter', {
-      deviceId, mark
-    })
+  static async changeCounter(data) {
+    const res = await $authHost.put('/basket/counter',data)
     return res.data
   }
 

@@ -1,6 +1,6 @@
 import React from "react"
 import { Form, FormLabel } from "react-bootstrap"
-import { ErrorForm } from "./ErrorMessage/ErrorForm"
+import { ErrorForm } from "../ErrorMessage/ErrorForm"
 
 export const InputGrpup = ({ name, type, register, errors, label, textarea, validate }) => {
   return (

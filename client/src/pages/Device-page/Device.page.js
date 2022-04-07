@@ -2,18 +2,24 @@ import React, {  useEffect } from 'react'
 import { Button, Col, Row, Image, Container } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Rating } from '../../components/Rating/Rating'
-import { StaticRating } from '../../commons/StaticRating'
+import { Impressions } from '../../components/Impressions/Impressions'
+import { StaticRating } from '../../commons/Rating/StaticRating'
 import { addDeviceInBasket,  deleteFromBasket } from '../../store/reducer/basketReducer'
 import { getOneDevice } from '../../store/reducer/devicesReducer'
+import { receivingDevice } from '../../store/selectors/device-selector'
+import { getIsAuth } from '../../store/selectors/user-selector'
 import st from './Device.module.scss'
 
+
+
 export const DevicePage = () => {
-  const device = useSelector((state) => state.devices.device)
-  const isAuth = useSelector((state) => state.user.isAuth)
+  const device = useSelector(receivingDevice)
+  const isAuth = useSelector(getIsAuth)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { id } = useParams()
+
+
 
   useEffect(() => {
     dispatch(getOneDevice(id))
@@ -55,7 +61,7 @@ export const DevicePage = () => {
               </Button>
 
             </div>
-            <Rating  deviceId={device.id} impression={device.impression}/>
+            <Impressions  deviceId={device.id} impression={device.impression}/>
 
           </Col>
           <Col md={{ span: 4, offset: 3 }}>

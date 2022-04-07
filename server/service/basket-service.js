@@ -9,7 +9,7 @@ class BasketService {
       include: Device,
     })
     if (!basket) {
-      return ApiError.err("Корзина пуста")
+      throw ApiError.err("Корзина пуста")
     }
     const array = basket.map((b) => {
       return new BasketDto(b)
@@ -23,7 +23,7 @@ class BasketService {
       where: { deviceId, basketId },
     })
     if (!candidate) {
-      return ApiError.err("Ops")
+      throw ApiError.err("Ops")
     }
 
     const data = await BasketDevice.create({ deviceId, basketId })
@@ -35,19 +35,19 @@ class BasketService {
     return basketDevice
   }
 
-  async changeCount(mark, deviceId, basketId) {
+  async changeCount(newCount, deviceId, basketId) {
     let basketDevice = await BasketDevice.findOne({
       where: { deviceId, basketId },
     })
     if (!basketDevice) {
-      return ApiError.err("Ops")
+      throw ApiError.err("Ops")
     }
-    if (basketDevice.count + mark < 1) {
-      return ApiError.err("Некоретні дані")
+    if (newCount < 1 ) {
+      throw ApiError.err("Некоретні дані")
     }
 
     await BasketDevice.update(
-      { count: (basketDevice.count += mark) },
+      { count: newCount },
       { where: { deviceId, basketId } }
     )
 

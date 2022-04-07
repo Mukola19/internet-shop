@@ -2,17 +2,18 @@ import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Col,  ListGroup, Row ,Container, Alert} from "react-bootstrap"
 import { DeviceList } from "../../components/DevicesList/DeviceList"
-import { PaginationShop } from "../../commons/Pagination/PaginationShop."
-import { AlertMessage } from "../../commons/AlertMessage"
-import {  getDevices } from "../../store/reducer/devicesReducer"
-import { TypesList } from "../../components/TypesList"
+import { PaginationShop } from "../../commons/Pagination/PaginationShop"
+import { AlertMessage } from "../../commons/Elements/AlertMessage"
+import { getDevices } from "../../store/reducer/devicesReducer"
+import { TypesList } from "../../components/TypesList/TypesList"
+import { receivingDevices } from "../../store/selectors/device-selector"
 import st from "./Shop.module.scss"
 
 
 
 
 export const ShopPage = () => {
-  const devices = useSelector((state) => state.devices)
+  const devices = useSelector(receivingDevices)
   const dispatch = useDispatch()
 
   return (

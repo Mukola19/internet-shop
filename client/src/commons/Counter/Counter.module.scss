@@ -2,16 +2,25 @@
   width: 100px;
   padding-top: 50px;
   display: flex;
+  align-items: center;
+
+ 
+
+  input {
+    border: none;
+    width: 50px;
+    margin-left: 20px;
+
+    &:focus {
+      border: none;
+      outline: 0px;
+    }
+  }
 }
 
-.sign:hover {
-  background-color: rgb(68, 68, 68);
-}
-
-.count{
+.count {
   padding: 10px;
   height: 5px;
   margin-left: 5px;
   color: rgb(8, 8, 8);
-  
 }

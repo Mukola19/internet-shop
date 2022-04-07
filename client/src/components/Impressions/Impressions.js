@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addImpression } from '../../store/reducer/devicesReducer'
-import st from './Rating.module.scss'
 import { Response } from './Response' 
 import { WriteAReview } from './WriteAReview'
+import st from './Impressions.module.scss'
 
-export const Rating = ({ impression, deviceId }) => {
+
+export const Impressions = ({ impression, deviceId }) => {
   const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch()
 

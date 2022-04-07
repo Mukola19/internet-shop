@@ -1,10 +1,10 @@
 import React from "react"
 import { Button, Form } from "react-bootstrap"
-import { InputGrpup } from "../../commons/InputGrpup"
+import { InputGrpup } from "../../commons/Elements/InputGrpup"
 import { useForm } from "react-hook-form"
 import { ModalHok } from "../../HOK/ModalHok"
 import { ChangingRating } from "./ChangingRating"
-import st from "./Rating.module.scss"
+import st from "./Impressions.module.scss"
 
 
 

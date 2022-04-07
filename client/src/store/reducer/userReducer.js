@@ -9,7 +9,7 @@ const initialState = {
   admin: false,
   client: false,
   isActivated: false,
-  isAith: false,
+  isAuth: false,
   adminMode: false,
   isLoading: false,
   isError: '',

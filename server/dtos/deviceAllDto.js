@@ -12,7 +12,7 @@ module.exports = class DeviceAllDto {
   constructor(model, basketId) {
     this.id = model.id
     this.name = model.name
-    this.price = model.pricess
+    this.price = model.price
     this.brandId = model.brandId
     this.typeId = model.typeId
     this.img = model.img

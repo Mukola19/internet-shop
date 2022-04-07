@@ -1,24 +1,41 @@
-import React, { useState } from "react";
-import cl from "classname";
-import st from "./Counter.module.css";
-import { Button } from "react-bootstrap";
+import React, { useEffect, useState } from "react"
+import cl from "classname"
+import st from "./Counter.module.scss"
+import { MyButton } from "../Elements/Button/MyButton"
 
-export const BasketCounter = ({ count, changeCounter }) => {
+export const Counter = ({ count, changeCounter }) => {
   const [disabled, setDisabled] = useState(false)
+  const [newCount, setNewCount] = useState(count)
 
 
+
+  const onchange = (num) => {
+    if (num < 0 || num.toString().length > 3) {
+      return setNewCount(newCount)
+    }
+    setNewCount(num)
+    changeCounter({ newCount: num, setDisabled })
+  }
 
   return (
     <div>
-      <div className={cl(st.counter)}>
-        <Button onClick={() => changeCounter(-1, setDisabled)} className={st.sign} variant='dark'  disabled={disabled}>
+      <div className={st.counter}>
+        <MyButton
+          onClick={() => onchange(newCount - 1)}
+          disabled={disabled || newCount === 1}
+        >
           -
-        </Button>
-        <span className={st.count}>{count}</span>
-        <Button onClick={() => changeCounter(1, setDisabled)} className={st.sign} variant='dark'   disabled={disabled}>
-          +
-        </Button>
+        </MyButton>
+        <input
+          className={st.count}
+          type="number"
+          value={newCount || 1}
+          onChange={e => onchange(+e.target.value)}
+        />
+        <MyButton onClick={() => onchange(newCount + 1)} disabled={disabled}>
+          ✚
+        </MyButton>
       </div>
     </div>
-  );
-};
+  )
+}

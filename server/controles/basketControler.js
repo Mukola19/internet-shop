@@ -22,11 +22,11 @@ class BasketControler {
 
   async changeCount (req, res, next) {
     try {
-      const { mark , deviceId } = req.body
-      const count = await basketService.changeCount( mark, deviceId, req.user.id)
+      const { newCount , deviceId } = req.body
+      const count = await basketService.changeCount( newCount, deviceId, req.user.id)
       res.json(count)
     } catch (e) {
-      console.log(e)
+      next(e)
     }
   }
 

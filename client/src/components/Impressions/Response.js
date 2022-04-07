@@ -1,6 +1,6 @@
 import React from 'react'
 import { StaticRating } from '../../commons/Rating/StaticRating'
-import st from './Rating.module.scss'
+import st from './Impressions.module.scss'
 
 export const Response = ({ impression }) => {
   return (
